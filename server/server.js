@@ -16,13 +16,10 @@ app.use(multer.array());
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
-
-mongoose.connect(
-  "mongodb+srv://MOUNEEL213:mouneel2purkas@project-1.vmb9zsr.mongodb.net/Estate?retryWrites=true&w=majority",
-  () => {
-    console.log("connected to DB");
-  }
-),
+const mongodb = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@project-1.vmb9zsr.mongodb.net/Estate?retryWrites=true&w=majority`;
+mongoose.connect(mongodb, () => {
+  console.log("connected to DB");
+}),
   (err) => console.log(err);
 
 app.listen(process.env.PORT || 3005, (err) => {
